@@ -82,6 +82,21 @@ body {
     border-left: 4px solid #007bff;
 }
 
+
+.edit-btn {
+    background: none;
+    border: none;
+    color: #007bff;
+    font-size: 1rem;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.edit-btn:hover {
+    text-decoration: underline;
+}
+
+
 .delete-btn {
     background: none;
     border: none;

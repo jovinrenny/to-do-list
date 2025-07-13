@@ -39,6 +39,32 @@ function renderList() {
             taskText.style.textDecoration = this.checked ? "line-through" : "none"
         })
 
+        // Edit btn
+
+        const editBtn = document.createElement("button")
+        editBtn.textContent = "Edit"
+        editBtn.classList.add("edit-btn")
+
+        editBtn.addEventListener("click", function() {
+            if(editBtn.textContent === "Edit") {
+                const editInput = document.createElement("input")
+                editInput.type = "text"
+                editInput.value = taskText.textContent
+                todoDiv.replaceChild(editInput, taskText)
+                editBtn.textContent = "Save"
+            }else {
+                const updatedValue = todoDiv.querySelector("input[type='text']").value.trim()
+                if(updatedValue !== "") {
+                    listArray[index] = updatedValue
+                    renderList()
+                } else {
+                    alert("Task cannot be empty.")
+                }
+            }
+        })
+
+        // Delete btn
+
         const deleteBtn = document.createElement("button")
         deleteBtn.textContent = "x"
         deleteBtn.classList.add("delete-btn")
@@ -49,6 +75,7 @@ function renderList() {
 
         todoDiv.appendChild(checkbox)
         todoDiv.appendChild(taskText)
+        todoDiv.appendChild(editBtn)
         todoDiv.appendChild(deleteBtn)
         listItems.appendChild(todoDiv)
 
