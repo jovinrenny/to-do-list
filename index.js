@@ -4,9 +4,11 @@ let addList = document.getElementById("add-list")
 let listItems = document.getElementById("list-items")
 
 
+
 addList.addEventListener("click", function() {
     if(inputEl.value.trim() !== "") {
         listArray.push(inputEl.value)
+        saveToLocalStorage()
         inputEl.value = ""
         renderList()
     } 
@@ -18,6 +20,17 @@ inputEl.addEventListener("keypress", function(event) {
     }
 })
 
+// save to local storage
+
+function saveToLocalStorage() {
+    localStorage.setItem("todoList", JSON.stringify(listArray))
+}
+
+const storedTasks = localStorage.getItem("todoList")
+if(storedTasks) {
+    listArray = JSON.parse(storedTasks)
+    renderList()
+}
 
 
 function renderList() {
@@ -56,6 +69,7 @@ function renderList() {
                 const updatedValue = todoDiv.querySelector("input[type='text']").value.trim()
                 if(updatedValue !== "") {
                     listArray[index] = updatedValue
+                    saveToLocalStorage()
                     renderList()
                 } else {
                     alert("Task cannot be empty.")
@@ -70,6 +84,7 @@ function renderList() {
         deleteBtn.classList.add("delete-btn")
         deleteBtn.addEventListener("click", function() {
             listArray.splice(index, 1)
+            saveToLocalStorage()
             renderList()
         })
 
